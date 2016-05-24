@@ -107,17 +107,19 @@ public class CoolWeatherDB {
 	/**
 	 * 将County实例存储到数据库
 	 */
-	public void saveCounties(County county){
+	public void saveCounty(County county){
+		if(county != null){
 		ContentValues values = new ContentValues();
 		values.put("county_name",county.getcountyName());
 		values.put("county_code", county.getcountyCode());
 		values.put("city_id", county.getcityId());
 		db.insert("County", null, values);
+		}
 	}
 	/**
 	 * 从数据库读取某市下所有的县信息
 	 */
-	public List<County> loadCounty(int cityId){
+	public List<County> loadCounties(int cityId){
 		List<County> list = new ArrayList<County>();
 		Cursor cursor = db.query("County", null, "cityId = ?", new String[]{String.valueOf(cityId)}, null, null, null);
 		if(cursor.moveToFirst()){
